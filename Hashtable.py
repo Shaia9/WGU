@@ -3,7 +3,7 @@
 
 
 class HashTable:
-    def __init__(self, start_capacity=10):
+    def __init__(self, start_capacity=20):
         self.map = []
         for _ in range(start_capacity):
             self.map.append([])
@@ -17,9 +17,11 @@ class HashTable:
             insert_hash = self.hash_key(key)
             insert_value = [key, value]
 
+            # Check if exists update it if not
             if self.map[insert_hash] == None:
                 self.map[insert_hash] = list([insert_value])
                 return True
+            # Insert
             else:
                 for pair in self.map[insert_hash]:
                     if pair[0] == key:
