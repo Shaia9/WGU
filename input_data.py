@@ -1,4 +1,4 @@
-import CSV
+import csv
 from Hashtable import HashTable
 
 # Read CSV files
@@ -25,13 +25,13 @@ with (open('./CSV/input_data.csv') as csvfile):
         address_location = ''
         delivery_status = ''
 
-        value = [id, address_location, address, city, state, zip, delivery, size, note, delivery_start, dilivery_status]
+        value = [id, address_location, address, city, state, zip, delivery, size, note, delivery_start, delivery_status]
 
         # Conditional statements to determine which truck to use
 
         # Fix incorrect package
         if '84104' in value[5] and '10:30' not in value[6]:
-            final_delivery.append(value)
+            third_delivery.append(value)
 
         # Set first truck
         if value[6] != 'EOD':
