@@ -1,11 +1,12 @@
 import csv
-from Hashtable import HashTable
+from hashtable import HashTable
 
 # Creating empty packages for csv data
 class DataManager:
     def __init__(self):
         self.hash_map = HashTable()
         self.distance = []
+        self.distance_data = []
         self.address_data = []
         self.first_delivery = []
         self.second_delivery = []
@@ -75,8 +76,10 @@ class DataManager:
     # index by Package_id
     def get_address_index(self, package_id):
         package = self.hash_map.retrieve_value(package_id)
-        address = package['address']
-        for index, row in enumerate(self.address_data):
-            return index
+        if package:
+            address = package['address']
+            for index, row in enumerate(self.address_data):
+                if address in row[1]:
+                 return index
             # Address not found
-            return -1
+        return -1

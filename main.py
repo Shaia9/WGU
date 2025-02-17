@@ -2,8 +2,9 @@
 Brett Shaia 011542410
 C950 Task 2: WGUPS ROUTING PROGRAM IMPLEMENTATION
 """
-from data_input import DataManager
-from Routing import Routing
+from data_manager import DataManager
+from routing import Routing
+
 
 
 def main():
