@@ -4,65 +4,59 @@
 
 class HashTable:
     def __init__(self, start_capacity=20):
-        self.map = []
-        for _ in range(start_capacity):
-            self.map.append([])
+# Initialize the hash table w/ empty lists
+        self.map = [[] for _ in range(start_capacity)]
 
-        # Hash Key Creation
-        def hash_key(self, key):
-            return int(key) % len(self.map)
+    # Create Hash Key
+    def hash_key(self, key):
+        return int(key) % len(self.map)
 
-        # Insert into Hash Table
-        def insert(self, key, value):
-            insert_hash = self.hash_key(key)
-            insert_value = [key, value]
+    # Insert into Hash Table
+    def insert(self, key, value):
+        insert_hash = self.hash_key(key)
+        insert_value = [key, value]
 
-            # Check if exists update it if not
-            if self.map[insert_hash] == None:
-                self.map[insert_hash] = list([insert_value])
-                return True
-            # Insert
-            else:
-                for pair in self.map[insert_hash]:
-                    if pair[0] == key:
-                        pair[1] = insert_value
-                        return True
-                self.map[insert_hash].append(insert_value)
+        # Check if key exists, update if it does
+        for pair in self.map[insert_hash]:
+            if pair[0] == key:
+                # Update if exists
+                pair[1] = value
+
                 return True
 
-        # Updating package in Hash Table
-        def update(self, key, value):
-           insert_hash = self.hash_key(key)
-           if self.map(insert_hash) != None:
-               for pair in self.map[insert_hash]:
-                   if pair[0] == key:
-                       var = pair[1] == value
-                       print(pair[1])
-                       return True
-           else:
-               print('Error updating key' + key)
+        # If key doesn't exist append
+        self.map[insert_hash].append(insert_value)
+        return True
 
-        # Returning value from Hash Table
-        def retrieve_value(self, key):
-            insert_hash = self.hash_key(key)
-            if self.map(insert_hash) is not None:
-                for pair in self.map[insert_hash]:
-                    if pair[0] == key:
-                        return pair[1]
-            return None
+    # Update package in Hash Table
+    def update(self, key, value):
+        insert_hash = self.hash_key(key)
+        for pair in self.map[insert_hash]:
+            if pair == key:
+                # Update
+                pair[1] = value
 
-        # Removing value from Hash Table
-        def remove(self, key):
-            insert_hash = self.hash_key(key)
-            if self.map(insert_hash) == None:
-                return False
-            for i in range(0, len(self.map[insert_hash])):
-                if self.map[insert_hash][i][0] == key:
-                    self.map[insert_hash].pop(i)
-                    return True
-                return False
+                return True
+        # Key not Found
+        return False
 
-    class EnterHashTable:
-        def __init__(self, key, item):
-            self.key = key
-            self.item = item
+    # Retrieve value from Hash Table
+    def retrieve_value(self, key):
+        insert_hash = self.hash_key(key)
+        for pair in self.map[insert_hash]:
+            if pair[0] == key:
+                # Return if key = found
+                return pair[1]
+        # Key not found
+        return None
+
+    # Logic to remove value
+    def remove(self, key):
+        insert_hash = self.hash_key(key)
+        for i, pair in enumerate(self.map[insert_hash]):
+            if pair[0] == key:
+        # Remove key pair
+                self.map[insert_hash].pop(i)
+            return True
+        # Key not found
+        return False
