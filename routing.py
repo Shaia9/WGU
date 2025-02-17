@@ -26,14 +26,24 @@ class Routing:
 
             for package_id in remaining_packages:
                 address_index = self.data_manager.get_address_index(package_id)
+                if address_index == -1:
+                    print(f"Skipping package {package_id}...Address wasn't found") # Debugging
+                    continue
+
                 distance = self.data_manager.get_distance(current_location, address_index)
                 if distance < nearest_distance:
                     nearest_distance = distance
                     nearest_package = package_id
 
-                route.append(nearest_package)
-                remaining_packages.remove(nearest_package)
-                current_location = self.data_manager.get_address_index(nearest_package)
+
+            if nearest_package is not None and nearest_package in remaining_packages:
+                    route.append(nearest_package)
+                    remaining_packages.remove(nearest_package)
+                    current_location = self.data_manager.get_address_index(nearest_package)
+                    print(f"Added package {nearest_package} to truck {truck_number}") # Debugging
+            else:
+                    print(f"No package found Skipping.") # Debugging
+                    break
 
         if truck_number == 1:
             self.first_truck = route
@@ -43,7 +53,9 @@ class Routing:
             self.third_truck = route
 
     # Delivery
-    # Time Complexity: O(n): one for loop
+    """ 
+     Time Complexity: O(n): one for loop
+    """
     def simulate_delivery(self, truck_route, departure_time):
         current_time = datetime.datetime.strptime(departure_time, '%H:%M:%S')
         total_distance = 0.0

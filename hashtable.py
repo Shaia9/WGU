@@ -3,7 +3,7 @@
 
 
 class HashTable:
-    def __init__(self, start_capacity=20):
+    def __init__(self, start_capacity=40):
 # Initialize the hash table w/ empty lists
         self.map = [[] for _ in range(start_capacity)]
 
@@ -32,7 +32,7 @@ class HashTable:
     def update(self, key, value):
         insert_hash = self.hash_key(key)
         for pair in self.map[insert_hash]:
-            if pair == key:
+            if pair[0] == key:
                 # Update
                 pair[1] = value
 

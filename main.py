@@ -33,5 +33,5 @@ def main():
     print(f"Distance for Truck 3: {total_distance_3} miles")
     print(f"Total combined miles: {total_distance_1 + total_distance_2 + total_distance_3}")
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
