@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c412a1d6-c6f2-485d-90d4-e10da9eaadeb" name="Changes" comment="Current bug -- not sure where. Will have to put debugging statements =[">
+    <list default="true" id="c412a1d6-c6f2-485d-90d4-e10da9eaadeb" name="Changes" comment="Current bug -- put in debugging statements and no help">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSV/distance_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/CSV/distance_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSV/input_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/CSV/input_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSV/name_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/CSV/name_data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hashtable.py" beforeDir="false" afterPath="$PROJECT_DIR$/hashtable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routing.py" beforeDir="false" afterPath="$PROJECT_DIR$/routing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,25 +49,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.HashTable.executor": "Run",
-    "Python.Hashtable.executor": "Run",
-    "Python.Routing.executor": "Run",
-    "Python.csv.executor": "Run",
-    "Python.csv_data.executor": "Run",
-    "Python.data_input.executor": "Run",
-    "Python.data_manager.executor": "Run",
-    "Python.distance.executor": "Run",
-    "Python.hashtable.executor": "Run",
-    "Python.input_data.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Working",
-    "ignore.virus.scanning.warn.message": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.HashTable.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Hashtable.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Routing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.csv_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_input.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_manager.executor&quot;: &quot;Run&quot;,
+    &quot;Python.distance.executor&quot;: &quot;Run&quot;,
+    &quot;Python.hashtable.executor&quot;: &quot;Run&quot;,
+    &quot;Python.input_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Working&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\brett\PycharmProjects\RoutingProgram" />
@@ -204,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739818259280</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Current bug -- put in debugging statements and no help">
+      <option name="closed" value="true" />
+      <created>1739827103162</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1739827103162</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -216,7 +218,8 @@
     <MESSAGE value="Work on package file" />
     <MESSAGE value="Rewrote into three files" />
     <MESSAGE value="Current bug -- not sure where. Will have to put debugging statements =[" />
-    <option name="LAST_COMMIT_MESSAGE" value="Current bug -- not sure where. Will have to put debugging statements =[" />
+    <MESSAGE value="Current bug -- put in debugging statements and no help" />
+    <option name="LAST_COMMIT_MESSAGE" value="Current bug -- put in debugging statements and no help" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -105,7 +105,7 @@ class DataManager:
                     print(f"Comparing with address in name_data.csv {row[1]}")
                     if address == row[1]:
                         print(f"Found address at index: {index}") # Debugging
-                    return index
+                        return index
             # Address not found
-        print(f"Address not found for package: {package_id}")
-        return -1
+            print(f"Address not found for package: {package_id}")
+            return -1
