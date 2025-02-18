@@ -103,7 +103,7 @@ class DataManager:
             for index, row in enumerate(self.address_data):
                 if len(row) > 1:
                     print(f"Comparing with address in name_data.csv {row[1]}")
-                    if address == row[1]:
+                    if address.strip().lower() == row[2].strip().lower():
                         print(f"Found address at index: {index}") # Debugging
                         return index
             # Address not found

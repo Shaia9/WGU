@@ -31,6 +31,7 @@ class Routing:
                     continue
 
                 distance = self.data_manager.get_distance(current_location, address_index)
+                print(f"Distance from {current_location} to {address_index}: {distance}") # Debugging
                 if distance < nearest_distance:
                     nearest_distance = distance
                     nearest_package = package_id

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c412a1d6-c6f2-485d-90d4-e10da9eaadeb" name="Changes" comment="Current bug -- put in debugging statements and no help">
+    <list default="true" id="c412a1d6-c6f2-485d-90d4-e10da9eaadeb" name="Changes" comment="Indention bug in data_manager.py fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routing.py" beforeDir="false" afterPath="$PROJECT_DIR$/routing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739827103162</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Indention bug in data_manager.py fixed">
+      <option name="closed" value="true" />
+      <created>1739892920418</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1739892920418</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -219,7 +228,8 @@
     <MESSAGE value="Rewrote into three files" />
     <MESSAGE value="Current bug -- not sure where. Will have to put debugging statements =[" />
     <MESSAGE value="Current bug -- put in debugging statements and no help" />
-    <option name="LAST_COMMIT_MESSAGE" value="Current bug -- put in debugging statements and no help" />
+    <MESSAGE value="Indention bug in data_manager.py fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Indention bug in data_manager.py fixed" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
