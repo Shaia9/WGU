@@ -27,11 +27,9 @@ class Routing:
             for package_id in remaining_packages:
                 address_index = self.data_manager.get_address_index(package_id)
                 if address_index == -1:
-                    print(f"Skipping package {package_id}...Address wasn't found") # Debugging
                     continue
 
                 distance = self.data_manager.get_distance(current_location, address_index)
-                print(f"Distance from {current_location} to {address_index}: {distance}") # Debugging
                 if distance < nearest_distance:
                     nearest_distance = distance
                     nearest_package = package_id
@@ -41,7 +39,6 @@ class Routing:
                     route.append(nearest_package)
                     remaining_packages.remove(nearest_package)
                     current_location = self.data_manager.get_address_index(nearest_package)
-                    print(f"Added package {nearest_package} to truck {truck_number}") # Debugging
             else:
                     print(f"No package found Skipping.") # Debugging
                     break
@@ -64,6 +61,7 @@ class Routing:
         current_location = 0
 
         for package_id in truck_route:
+            package = self.data_manager.hash_map.retrieve_value(package_id)
             address_index = self.data_manager.get_address_index(package_id)
             distance = self.data_manager.get_distance(current_location, address_index)
             total_distance += distance
@@ -80,3 +78,20 @@ class Routing:
 
         return total_distance
 
+    # Method for checking delivery status
+    def display_package_status(self, user_time):
+        user_time = datetime.datetime.strptime(user_time, '%H:%M:%S')
+
+        # Check status of all packages/statuses
+        all_packages = self.first_truck + self.second_truck + self.third_truck
+        for package_id in all_packages:
+            package = self.data_manager.hash_map.retrieve_value(package_id)
+            package_status = package.get("status", "Not delivered yet")
+
+            if "Delivered at" in package_status:
+                delivery_time = datetime.datetime.strptime(package_status.split("at ")[1], '%H:%M:%S')
+                if delivery_time <= user_time:
+                    package_status = f"Delivered at {delivery_time.strftime('%H:%M:%S')}"
+                else:
+                    package_status = "Pending delivery"
+            print(f"Package: {package_id} - Status: {package_status}")

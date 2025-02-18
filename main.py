@@ -2,13 +2,25 @@
 Brett Shaia 011542410
 C950 Task 2: WGUPS ROUTING PROGRAM IMPLEMENTATION
 """
+import datetime
 from data_manager import DataManager
 from routing import Routing
 
+# Input for time to get a specific time for package status
+def ask_user_for_time(routing_instance):
+    while True:
+        user_time = input("Enter a time (HH:MM:SS) for package status or type 'exit' to quit: ")
+        if user_time.lower() == 'exit':
+            break
 
+        try:
+            datetime.datetime.strptime(user_time, "%H:%M:%S")
+            routing_instance.display_package_status(user_time)
+        except ValueError:
+            print(f"Invalid format. Pleaser enter time in HH:MM:SS format.")
 
 def main():
-    # Initialize data manger
+    # Initialize data manager
     data_manager = DataManager()
     data_manager.load_package_data('./CSV/input_data.csv')
     data_manager.load_distance_data('./CSV/distance_data.csv')
@@ -32,6 +44,9 @@ def main():
     print(f"Distance for Truck 2: {total_distance_2} miles")
     print(f"Distance for Truck 3: {total_distance_3} miles")
     print(f"Total combined miles: {total_distance_1 + total_distance_2 + total_distance_3}")
+
+    # Prompt the user for specific time
+    ask_user_for_time(routing)
 
 if __name__ == "__main__":
     main()
