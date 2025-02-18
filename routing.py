@@ -1,4 +1,3 @@
-from data_manager import DataManager
 import datetime
 
 
@@ -43,6 +42,7 @@ class Routing:
                     print(f"No package found Skipping.") # Debugging
                     break
 
+        # Assigns truck number to route
         if truck_number == 1:
             self.first_truck = route
         elif truck_number == 2:
@@ -54,7 +54,7 @@ class Routing:
     """ 
      Time Complexity: O(n): one for loop
     """
-    def simulate_delivery(self, truck_route, departure_time):
+    def simulate_delivery(self, truck_route, departure_time, truck_number):
         current_time = datetime.datetime.strptime(departure_time, '%H:%M:%S')
         total_distance = 0.0
         # Set to start at hub
@@ -73,6 +73,7 @@ class Routing:
             # Update status
             package = self.data_manager.hash_map.retrieve_value(package_id)
             package["status"] = f"Delivered at {current_time.strftime('%H:%M:%S')}"
+            package["truck"] = truck_number
             self.data_manager.hash_map.update(package_id, package)
             current_location = address_index
 
@@ -87,11 +88,25 @@ class Routing:
         for package_id in all_packages:
             package = self.data_manager.hash_map.retrieve_value(package_id)
             package_status = package.get("status", "Not delivered yet")
+            truck_assigned = package.get("truck", "Unknown truck")
+
+            # Truck departure times
+            truck_departure_times = {1: "08:00:00", 2: "9:05:00", 3: "10:20:00"}
+            departure_time = datetime.datetime.strptime(truck_departure_times.get(truck_assigned, "23:59:59"), '%H:%M:%S')
 
             if "Delivered at" in package_status:
                 delivery_time = datetime.datetime.strptime(package_status.split("at ")[1], '%H:%M:%S')
                 if delivery_time <= user_time:
-                    package_status = f"Delivered at {delivery_time.strftime('%H:%M:%S')}"
+                   package_status = f"Delivered at {delivery_time.strftime('%H:%M:%S')}"
+                elif user_time >= departure_time:
+                    package_status = "En-route"
                 else:
-                    package_status = "Pending delivery"
-            print(f"Package: {package_id} - Status: {package_status}")
+                    package_status = "at the hub"
+            else:
+                if user_time >= departure_time:
+                    package_status = "En-route"
+                else:
+                    package_status = "At the hub"
+
+            # Displays package status and truck info
+            print(f"Package: {package_id} - Status: {package_status} - Assigned to Truck: {truck_assigned}")
