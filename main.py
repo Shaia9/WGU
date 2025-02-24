@@ -49,6 +49,7 @@ def main():
     total_distance_2 = routing.simulate_delivery(routing.second_truck, '09:10:00', 2)
     total_distance_3 = routing.simulate_delivery(routing.third_truck, '11:00:00', 3)
 
+
     # Print results
     print(f"Distance for Truck 1: {total_distance_1} miles")
     print(f"Distance for Truck 2: {total_distance_2} miles")
