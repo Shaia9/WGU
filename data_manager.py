@@ -1,5 +1,6 @@
 import csv
 from hashtable import HashTable
+from package import Package
 from datetime import datetime
 
 # Creating empty packages for csv data
@@ -31,22 +32,13 @@ class DataManager:
                 weight = row[6].strip()
                 notes = row[7].strip() if len(row) > 7 else ""
 
-                package_data = {
-                    "address" : address,
-                    "city" : city,
-                    "state" : state,
-                    "zip" : zip_code,
-                    "deadline" : deadline,
-                    "weight" : weight,
-                    "notes" : notes,
-                    # Set default status
-                    "status" : "Not shipped: At hub"
-                }
+                # Creating the package object
+                package_obj = Package(package_id, address, city, state, zip_code, deadline, weight, notes)
 
                 # Insert into Hash Table
-                self.hash_map.insert(package_id, package_data)
+                self.hash_map.insert(package_id, package_obj)
 
-                #Assign based on constraints
+                # Assign based on constraints
                 if '84104' in zip_code and '10:30' not in deadline:
                     self.third_delivery.append(package_id)
                 elif deadline != 'EOD' and ('Must' in notes or "None" in notes):
@@ -56,6 +48,15 @@ class DataManager:
                         self.second_delivery.append(package_id)
                     else:
                         self.third_delivery.append(package_id)
+    """
+    Lookup function (Takes Package_id and returns package object)
+    """
+    def lookup_package(self, package_id):
+        package_obj = self.hash_map.retrieve_value(package_id)
+        if package_obj is None:
+            print(f"{package_id} is not found: Try re-entering package ID")
+            return None
+        return package_obj
 
     # Load distance
     def load_distance_data(self, filename):
@@ -90,7 +91,7 @@ class DataManager:
     def get_address_index(self, package_id):
         package = self.hash_map.retrieve_value(package_id)
         if package:
-            address = package['address']
+            address = package.address
             for index, row in enumerate(self.address_data):
                 if len(row) > 1:
                     if address.strip().lower() == row[2].strip().lower():
@@ -98,3 +99,4 @@ class DataManager:
             # Address not found
             print(f"Address not found for package: {package_id}")
             return -1
+

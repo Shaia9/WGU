@@ -19,6 +19,16 @@ def ask_user_for_time(routing_instance):
         except ValueError:
             print(f"Invalid format. Pleaser enter time in HH:MM:SS format.")
 
+# Input for package ID lookup
+def lookup_package(data_manager):
+    try:
+        package_id = int(input("Enter a package ID to lookup: "))
+        package = data_manager.lookup_package(package_id)
+        if package:
+            print(package)
+    except ValueError:
+        print ("Invalid. Please enter a valid integer for the package ID.")
+
 def main():
     # Initialize data manager
     data_manager = DataManager()
@@ -45,8 +55,22 @@ def main():
     print(f"Distance for Truck 3: {total_distance_3} miles")
     print(f"Total combined miles: {total_distance_1 + total_distance_2 + total_distance_3}")
 
-    # Prompt the user for specific time
-    ask_user_for_time(routing)
+    # Interactive menu
+    while True:
+        print("\nSelect an option:\n")
+        print("1: Check status for packages at a given time\n")
+        print("2: Lookup package detail by ID\n")
+        print("3: Exit\n")
+        choice = input("Enter (1, 2, or 3): ")
+        if choice == "1":
+            ask_user_for_time(routing)
+        elif choice == "2":
+            lookup_package(data_manager)
+        elif choice == "3":
+            print("Exiting program.")
+            break
+        else:
+            print("Invalid option. Please enter 1, 2, or 3")
 
 if __name__ == "__main__":
     main()

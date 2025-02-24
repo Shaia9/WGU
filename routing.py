@@ -61,7 +61,7 @@ class Routing:
         current_location = 0
 
         for package_id in truck_route:
-            package = self.data_manager.hash_map.retrieve_value(package_id)
+            self.data_manager.hash_map.retrieve_value(package_id)
             address_index = self.data_manager.get_address_index(package_id)
             distance = self.data_manager.get_distance(current_location, address_index)
             total_distance += distance
@@ -72,8 +72,8 @@ class Routing:
 
             # Update status
             package = self.data_manager.hash_map.retrieve_value(package_id)
-            package["status"] = f"Delivered at {current_time.strftime('%H:%M:%S')}"
-            package["truck"] = truck_number
+            package.status = f"Delivered at {current_time.strftime('%H:%M:%S')}"
+            package.truck = truck_number
             self.data_manager.hash_map.update(package_id, package)
             current_location = address_index
 
@@ -87,8 +87,8 @@ class Routing:
         all_packages = self.first_truck + self.second_truck + self.third_truck
         for package_id in all_packages:
             package = self.data_manager.hash_map.retrieve_value(package_id)
-            package_status = package.get("status", "Not delivered yet")
-            truck_assigned = package.get("truck", "Unknown truck")
+            package_status = package.status
+            truck_assigned = package.truck if package.truck is not None else "Unknown truck"
 
             # Truck departure times
             truck_departure_times = {1: "08:00:00", 2: "9:05:00", 3: "10:20:00"}
