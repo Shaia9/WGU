@@ -1,7 +1,5 @@
 import datetime
 
-
-
 class Routing:
     # Initialize data from data_manager
     def __init__(self, data_manager):
@@ -119,11 +117,7 @@ class Routing:
             else:
                 dep_time = None
 
-            # Now, compute status dynamically:
-            # If the package has a delivery_time, then:
-            #  - If user_dt >= delivery_time: it's Delivered.
-            #  - Else if user_dt is after departure time: it's En-route.
-            #  - Otherwise: it's At the hub.
+            # compute status dynamically:
             if package.delivery_time is not None:
                 if user_dt >= package.delivery_time:
                     computed_status = f"Delivered at {package.delivery_time.strftime('%H:%M:%S')}"
