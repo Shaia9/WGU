@@ -16,7 +16,8 @@ class Routing:
         route = []
         # Default index of 0
         current_location = 0
-        remaining_packages = truck_packages.copy()
+        remaining_packages = list(truck_packages)
+
 
         while remaining_packages:
             nearest_distance = float('inf')
@@ -62,12 +63,22 @@ class Routing:
         for package_id in truck_route:
             package = self.data_manager.hash_map.retrieve_value(package_id)
             address_index = self.data_manager.get_address_index(package_id)
+
             distance = self.data_manager.get_distance(current_location, address_index)
             total_distance += distance
 
             # Calc delivery time 18mph == .3 miles/min
             travel_time = distance / 0.3
             current_time += datetime.timedelta(minutes=travel_time)
+
+            # If Package has deadline
+            if package.deadline != "EOD":
+                deadline_time = datetime.datetime.strptime(package.deadline, "%I:%M %p")
+                if current_time > deadline_time:
+                    print(f"WARNING: Package {package.package_id} is LATE! "
+                          f"Delivered at {current_time.strftime('%H:%M:%S')} "
+                          f"but deadline was {package.deadline}")
+
 
             # Special handling: if package is delayed on flight, wait until 09:05.
             if "Delayed on flight" in package.notes:
@@ -86,7 +97,6 @@ class Routing:
             package.delivery_time = current_time
             package.truck = truck_number
             self.data_manager.hash_map.update(package_id, package)
-
             current_location = address_index
 
         return total_distance
@@ -96,7 +106,12 @@ class Routing:
         user_dt = datetime.datetime.strptime(user_time, '%H:%M:%S')
 
         # Check status of all packages/statuses
-        all_packages = self.data_manager.first_delivery + self.data_manager.second_delivery + self.data_manager.third_delivery
+        all_packages = (
+                self.data_manager.first_delivery +
+                self.data_manager.second_delivery +
+                self.data_manager.third_delivery
+        )
+
 
 
         truck_departure_times = {1: "08:00:00", 2: "09:10:00", 3: "10:20:00"}
@@ -104,11 +119,16 @@ class Routing:
         for package_id in all_packages:
             package = self.data_manager.hash_map.retrieve_value(package_id)
 
-            # For package 9: if user time is >= 10:20, update the address for display.
+
+
+            # If it's #9, conditionally override:
             if package.package_id == 9:
                 cutoff_dt = datetime.datetime.strptime("10:20:00", "%H:%M:%S")
-                if user_dt >= cutoff_dt:
-                    package.address = "410 S State St"  # Correct address
+                if user_dt < cutoff_dt:
+                    package.address = "300 State St"  # old/wrong
+                else:
+                    package.address = "410 S State St"
+
 
             # Determine the truck's departure time.
             truck_assigned = package.truck if package.truck is not None else None

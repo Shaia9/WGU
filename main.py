@@ -47,7 +47,7 @@ def main():
     # Delivery simulation
     total_distance_1 = routing.simulate_delivery(routing.first_truck, '08:00:00', 1)
     total_distance_2 = routing.simulate_delivery(routing.second_truck, '09:10:00', 2)
-    total_distance_3 = routing.simulate_delivery(routing.third_truck, '11:00:00', 3)
+    total_distance_3 = routing.simulate_delivery(routing.third_truck, '10:20:00', 3)
 
 
     # Print results

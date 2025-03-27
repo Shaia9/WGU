@@ -25,6 +25,7 @@ class DataManager:
         self.second_delivery = []  # departing at 9:10
         self.third_delivery = []  # delivers after 10:20 when package 9’s address is corrected
 
+
         # Define group constraint:
         group_constraints = {13, 14, 15, 16, 19, 20}
 
@@ -45,65 +46,31 @@ class DataManager:
                 weight = row[6].strip()
                 notes = row[7].strip() if len(row) > 7 else ""
 
-                # Create the Package object
                 package_obj = Package(package_id, address, city, state, zip_code, deadline, weight, notes)
                 self.hash_map.insert(package_id, package_obj)
 
+
                 # ---- Assignment Logic (each truck max 16 packages) ----
-                # Forced to Truck 3:
-                if package_id == 9:
-                    self.third_delivery.append(package_id)
-                    continue
+                first_assignment = {
+                    1, 2, 4, 13, 14, 15, 16, 19, 20, 29, 30, 31, 34, 37, 39, 40
+                }
+                second_assignment = {
+                    3, 6, 18, 25, 28, 32, 36, 38
+                }
+                third_assignment = {
+                    5, 7, 8, 9, 10, 11, 12, 17, 21, 22, 23, 24, 26, 27, 33, 35
+                }
 
-                # "Can only be on truck 2"
-                if "Can only be on truck 2" in notes:
-                    if len(self.second_delivery) < 16:
-                        self.second_delivery.append(package_id)
-                    continue
+                ...
 
-                # "Delayed on flight"
-                if "Delayed on flight" in notes:
-                    if len(self.second_delivery) < 16:
-                        self.second_delivery.append(package_id)
-                    else:
-                        self.third_delivery.append(package_id)
-                    continue
-
-                # Time-sensitive packages
-                if deadline != "EOD":
-                    if len(self.first_delivery) < 16:
-                        self.first_delivery.append(package_id)
-                    elif len(self.second_delivery) < 16:
-                        self.second_delivery.append(package_id)
-                    else:
-                        self.third_delivery.append(package_id)
-                    continue
-
-                # Group-constrained packages:
-                if package_id in group_constraints:
-                    if any(pid in self.first_delivery for pid in group_constraints):
-                        if len(self.first_delivery) < 16:
-                            self.first_delivery.append(package_id)
-                        elif len(self.second_delivery) < 16:
-                            self.second_delivery.append(package_id)
-                        else:
-                            self.third_delivery.append(package_id)
-                    else:
-                        if len(self.first_delivery) + len(group_constraints) <= 16:
-                            self.first_delivery.append(package_id)
-                        elif len(self.second_delivery) + len(group_constraints) <= 16:
-                            self.second_delivery.append(package_id)
-                        else:
-                            self.third_delivery.append(package_id)
-                    continue
-
-                # For all remaining packages (deadline == "EOD" and no special note)
-                if len(self.first_delivery) < 16:
+                if package_id in first_assignment:
                     self.first_delivery.append(package_id)
-                elif len(self.second_delivery) < 16:
+                elif package_id in second_assignment:
                     self.second_delivery.append(package_id)
-                else:
+                elif package_id in third_assignment:
                     self.third_delivery.append(package_id)
+                else:
+                    print(f"ERROR: Package {package_id} not in any assignment set!")
 
     """
     Lookup function (Takes Package_id and returns package object)
@@ -126,7 +93,6 @@ class DataManager:
                     self.distance_data.append([float(x) if x else 0.0 for x in cleaned_row])
                 except ValueError:
                     print(f"Skipping row: {row}")
-        print(f"Loaded distance data: {self.distance_data}")
 
 
     # Load address
